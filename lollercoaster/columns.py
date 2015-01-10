@@ -1,7 +1,7 @@
-column_types = {
-    "up": "/",
-    "flat": "_",
-    "down": "\\"
+column_dict = {
+    1: "/",
+    0: "_",
+    -1: "\\"
 }
 
 pattern_types = [
@@ -12,13 +12,13 @@ pattern_types = [
 
 class Column(object):
     def __init__(self, height, column_type, max_height):
-        if column_type not in column_types:
+        if column_type not in column_dict:
             raise ValueError()
 
         self.rows = [" "] * max_height
         self.type = type
         self.height = height
-        self.rows[height] = column_types[column_type]
+        self.rows[height] = column_dict[column_type]
 
     def retrieve_row(self, row):
         return self.rows[row]
@@ -27,7 +27,7 @@ class Column(object):
         if pattern not in pattern_types:
             raise ValueError()
 
-        for i in range(len(self.rows[self.height:])):
+        for i in range(len(self.rows[:self.height])):
             if pattern == "col":
                 self.rows[i] = "|"
             elif pattern == "in":
