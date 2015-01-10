@@ -4,6 +4,11 @@ column_types = {
     "down": "\\"
 }
 
+pattern_types = [
+    "col",
+    "in",
+    "out",
+]
 
 class Column(object):
     def __init__(self, height, column_type, max_height):
@@ -17,3 +22,21 @@ class Column(object):
 
     def retrieve_row(self, row):
         return self.rows[row]
+
+    def fill(self, pattern):
+        if pattern not in pattern_types:
+            raise ValueError()
+
+        for i in range(len(self.rows[self.height:])):
+            if pattern == "col":
+                self.rows[i] = "|"
+            elif pattern == "in":
+                if i & 1:
+                    self.rows[i] = "/"
+                else:
+                    self.rows[i] = "\\"
+            elif pattern == "out":
+                if i & 1:
+                    self.rows[i] = "\\"
+                else:
+                    self.rows[i] = "/"
