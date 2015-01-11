@@ -1,4 +1,4 @@
-from lollercoaster.generator import ColumnBlock
+from lollercoaster.generator import LollerCoaster
 from lollercoaster.ground import Earth
 from colorama import *
 import time
@@ -7,7 +7,7 @@ import time
 init()
 
 # Setup the column builder
-block = ColumnBlock(79, 20)
+block = LollerCoaster(79, 20)
 
 # Setup the Earth (wow!)
 earth = Earth(2, 79)

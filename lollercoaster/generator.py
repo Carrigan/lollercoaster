@@ -39,7 +39,7 @@ class ColumnBuilder(object):
         return self.last_column
 
 
-class ColumnBlock(object):
+class LollerCoaster(object):
     def __init__(self, column_count, max_height):
         self.column_count = column_count
         self.builder = ColumnBuilder(max_height)
@@ -49,7 +49,7 @@ class ColumnBlock(object):
         for count in xrange(1, self.column_count):
             self.columns.append(self.builder.create_next_column())
 
-        self.draw_lollercoaster()
+        self.draw_cart()
 
     def __repr__(self):
         # Fill the rows, starting at the top working down
@@ -64,10 +64,10 @@ class ColumnBlock(object):
     def cycle(self):
         self.columns = self.columns[1:]
         self.columns.append(self.builder.create_next_column())
-        self.draw_lollercoaster()
+        self.draw_cart()
         return self
 
-    def draw_lollercoaster(self):
+    def draw_cart(self):
         for col in self.columns:
             col.revert_top()
 
