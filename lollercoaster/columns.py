@@ -10,15 +10,17 @@ pattern_types = [
     "out",
 ]
 
+
 class Column(object):
     def __init__(self, height, column_type, max_height):
         if column_type not in column_dict:
             raise ValueError()
 
         self.rows = [" "] * max_height
-        self.type = type
+        self.column_type = column_type
         self.height = height
         self.rows[height] = column_dict[column_type]
+        self.max_height = max_height
 
     def retrieve_row(self, row):
         return self.rows[row]
