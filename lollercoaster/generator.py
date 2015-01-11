@@ -21,17 +21,17 @@ class ColumnBuilder(object):
         height = self.last_column.height
         last_type = self.last_column.column_type
 
+        current_type = random.randint(-1, 1)
+
         if last_type == 1:
             height += 1
-
-        current_type = random.randint(-1, 1)
 
         if current_type == -1:
             if height == 0:
                 current_type = 0
             height += current_type
 
-        if current_type == 1 and height == self.max_height - 1:
+        if current_type == 1 and height == self.max_height - 2:
             current_type = 0
 
         self.last_column = Column(height, current_type, self.max_height)
@@ -39,21 +39,27 @@ class ColumnBuilder(object):
         return self.last_column
 
 
-def generate_block(cols, max_height):
-    # Create the column builder object
-    builder = ColumnBuilder(max_height)
+class ColumnBlock(object):
+    def __init__(self, column_count, max_height):
+        self.column_count = column_count
+        self.builder = ColumnBuilder(max_height)
+        self.max_height = max_height
 
-    # Create a column array and fill it with the initial window
-    columns = [builder.create_initial_column()]
-    for count in xrange(1, cols):
-        columns.append(builder.create_next_column())
+        self.columns = [self.builder.create_initial_column()]
+        for count in xrange(1, self.column_count):
+            self.columns.append(self.builder.create_next_column())
 
-    # Fill the rows, starting at the top working down
-    rows = [""] * max_height
-    for c in range(max_height):
-        for col in columns:
-            rows[c] += col.retrieve_row(max_height - c - 1)
+    def __repr__(self):
+        # Fill the rows, starting at the top working down
+        output = ""
 
-    # Print the rows
-    for row in rows:
-        print row
+        for column in self.columns:
+            output += "{},".format(column.height)
+        output = output[:-1] + "\n\n"
+
+        for c in range(self.max_height):
+            for col in self.columns:
+                output += col.retrieve_row(self.max_height - c - 1)
+            output += "\n"
+
+        return output
