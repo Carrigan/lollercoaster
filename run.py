@@ -1,5 +1,5 @@
 from lollercoaster.generator import LollerCoaster
-from lollercoaster.ground import Earth
+from lollercoaster.earth import Earth
 from colorama import *
 import time
 
@@ -14,6 +14,6 @@ earth = Earth(2, 79)
 
 # Main loop
 while True:
-    print block.cycle()
-    print earth.cycle()
+    print block.advance()
+    print earth.advance()
     time.sleep(.33)
