@@ -42,3 +42,9 @@ class Column(object):
                     self.rows[i] = "\\"
                 else:
                     self.rows[i] = "/"
+
+    def change_top(self, character):
+        self.rows[self.height] = "\x1b[31;1m" + character + "\x1b[0m"
+
+    def revert_top(self):
+        self.rows[self.height] = column_dict[self.column_type]

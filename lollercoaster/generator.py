@@ -49,6 +49,8 @@ class ColumnBlock(object):
         for count in xrange(1, self.column_count):
             self.columns.append(self.builder.create_next_column())
 
+        self.draw_lollercoaster()
+
     def __repr__(self):
         # Fill the rows, starting at the top working down
         output = ""
@@ -62,3 +64,14 @@ class ColumnBlock(object):
     def cycle(self):
         self.columns = self.columns[1:]
         self.columns.append(self.builder.create_next_column())
+        self.draw_lollercoaster()
+        return self
+
+    def draw_lollercoaster(self):
+        for col in self.columns:
+            col.revert_top()
+
+        lollercoaster = "ROFLOLOLOL"
+        for i, c in enumerate(lollercoaster):
+            self.columns[i + 30].change_top(c)
+

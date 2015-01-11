@@ -1,4 +1,5 @@
 from lollercoaster.generator import ColumnBlock
+from lollercoaster.ground import Earth
 from colorama import *
 import time
 
@@ -8,10 +9,11 @@ init()
 # Setup the column builder
 block = ColumnBlock(79, 20)
 
+# Setup the Earth (wow!)
+earth = Earth(2, 79)
+
 # Main loop
 while True:
-    print("\x1b2J")
-    print block
-
-    block.cycle()
-    time.sleep(.1)
+    print block.cycle()
+    print earth.cycle()
+    time.sleep(.33)
