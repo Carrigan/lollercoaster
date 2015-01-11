@@ -52,14 +52,13 @@ class ColumnBlock(object):
     def __repr__(self):
         # Fill the rows, starting at the top working down
         output = ""
-
-        for column in self.columns:
-            output += "{},".format(column.height)
-        output = output[:-1] + "\n\n"
-
         for c in range(self.max_height):
             for col in self.columns:
                 output += col.retrieve_row(self.max_height - c - 1)
             output += "\n"
 
         return output
+
+    def cycle(self):
+        self.columns = self.columns[1:]
+        self.columns.append(self.builder.create_next_column())
