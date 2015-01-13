@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from lollercoaster.generator import LollerCoaster
 from lollercoaster.earth import Earth
 from colorama import *
